@@ -1,0 +1,75 @@
+<h1>Hello <%= adminUser.name %></h1>
+<form action="/logout?_method=DELETE" method="POST">
+    <button type="submit">Log out</button>
+</form>
+<input type="button" onclick="location.href='./new';" value="Add New User" />
+<input type="button" onclick="getcheckedTo('edit')" value="Edit User" />
+<input type="button" onclick="getcheckedTo('delete')" value="Delete User/s"/>
+<table id="Table1">
+    <%var once = false%>
+    <%for(const obj of userData){ %>
+        <tr>
+            <% if(!once){ %>
+                <th>&nbsp;</th>
+                <% for(const key in obj) { %>
+                    <th><%= key %></th>
+                <% } %>
+            <% } %>
+            <% once = true %>
+        </tr>
+        <tr>
+            <td><input type="checkbox"/>&nbsp;</td>
+            <% for(const key in obj) { %>
+                <td><%= obj[key] %></td>
+            <% } %>
+        </tr>
+    <% } %>
+</table>
+<script type="text/javascript">
+    
+function getcheckedTo(mode) {
+    //Reference the Table.
+    var grid = document.getElementById("Table1");
+
+    //Reference the CheckBoxes in Table.
+    var checkBoxes = grid.getElementsByTagName("INPUT");
+
+    var count = 0;
+    for (var i = 0; i < checkBoxes.length; i++) {
+        if (checkBoxes[i].checked) {
+            count++;
+        }
+    }
+    if(count <= 1){
+        var row = null;
+        for(var i = 0; i <checkBoxes.length; i++){
+            if(checkBoxes[i].checked){
+                var row = checkBoxes[i].parentNode.parentNode;
+            }
+        }
+        if(mode === 'edit'){
+            window.location.replace("http://localhost:3000/user/" + row.cells[1].innerHTML)
+        }
+        else if(mode === 'delete'){
+            var xmlhttp = new XMLHttpRequest();
+            var url = "http://localhost:3000/delete/" + row.cells[1].innerHTML;
+            xmlhttp.onreadystatechange = function (res) {
+                if(this.readyState == 4 && this.status == 200){
+                    document.write(this.responseText);
+                }
+            };
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+        }
+    }
+    else if(count == 0){
+        alert("No rows selected!")
+    }
+    else{
+        if(mode === 'edit')alert("Select only one user to edit!");
+        else if(mode === 'delete'){
+
+        }
+    }
+}
+</script>

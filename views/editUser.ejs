@@ -1,0 +1,41 @@
+<h1>Edit User</h1>
+<form action="/user/<%= user.id %>" method="POST">    
+    <div>
+        <label for="id" hidden>ID</label>
+        <input type="text" id="id" name="id" value="<%= user.id %>" hidden>
+    </div>
+    <div>
+        <label for="firstname">Firstname</label>
+        <input type="text" id="firstname" name="firstname" value="<%= user.firstname %>" required>
+    </div>
+    <div>
+        <label for="lastname">Lastname</label>
+        <input type="text" id="lastname" name="lastname" value="<%= user.lastname %>" required>
+    </div>
+    <div>
+        <label for="address">Address</label>
+        <input type="address" id="address" name="address" value="<%= user.address %>" required>
+    </div>
+    <div>
+        <label for="postcode">Postcode</label>
+        <input type="postcode" id="postcode" name="postcode" value="<%= user.postcode %>" required>
+    </div>
+    <div>
+        <label for="phonenumber">Phone Number</label>
+        <input type="phonenumber" id="phonenumber" name="phonenumber" value="<%= user.phone_number %>" required>
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="<%= user.email %>" required>
+    </div>
+    <div>
+        <label for="username">Username</label>
+        <input type="username" id="username" name="username" value="<%= user.username %>" required>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" value="" required>
+    </div>
+    <button type="submit">Update User</button>
+</form>
+<a href="/">Cancel</a>
