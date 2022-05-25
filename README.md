@@ -44,4 +44,8 @@ To start the server, instead of using nodemon, use this:
 ```
 npm run devStart
 ```
+Then visit your browser at:
+```
+localhost:3000
+```
 
