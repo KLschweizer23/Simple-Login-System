@@ -1,30 +1,57 @@
-<h1>Hello <%= adminUser.name %></h1>
-<form action="/logout?_method=DELETE" method="POST">
-    <button type="submit">Log out</button>
-</form>
-<input type="button" onclick="location.href='./new';" value="Add New User" />
-<input type="button" onclick="getcheckedTo('edit')" value="Edit User" />
-<input type="button" onclick="getcheckedTo('delete')" value="Delete User/s"/>
-<table id="Table1">
-    <%var once = false%>
-    <%for(const obj of userData){ %>
-        <tr>
-            <% if(!once){ %>
-                <th>&nbsp;</th>
-                <% for(const key in obj) { %>
-                    <th><%= key %></th>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Login</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+</head>
+<body>
+    <div class="w-100 mx-auto ">
+        <div class="text-center m-3">
+            <h1>Hello <%= adminUser.name %>!</h1>
+        </div>
+        <input class="btn btn-success" type="button" onclick="location.href='./new';" value="Add New User" />
+        <input class="btn btn-warning" type="button" onclick="getcheckedTo('edit')" value="Edit User" />
+        <input class="btn btn-danger" type="button" onclick="getcheckedTo('delete')" value="Delete User/s"/>
+        <div class="m-2 p-0 text-center">
+            <table class="mx-center w-100 table table-hover " id="Table1">
+                <%var once = false%>
+                <%for(const obj of userData){ %>
+                    <tr>
+                        <% if(!once){ %>
+                            <th>&nbsp;</th>
+                            <% for(const key in obj) { %>
+                                <th><%= key %></th>
+                            <% } %>
+                        <% } %>
+                        <% once = true %>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/>&nbsp;</td>
+                        <% for(const key in obj) { %>
+                            <% if(key === 'password'){ %>
+                            <%      var password = obj[key]; var newPass = "";%>
+                            <%      for(var i = 0; i < password.length; i++){newPass += '•'} %>
+                                    <td><%= newPass %></td>
+                            <%} else{%>
+                            <td><%= obj[key] %></td>
+                            <% } %>
+                        <% } %>
+                    </tr>
                 <% } %>
-            <% } %>
-            <% once = true %>
-        </tr>
-        <tr>
-            <td><input type="checkbox"/>&nbsp;</td>
-            <% for(const key in obj) { %>
-                <td><%= obj[key] %></td>
-            <% } %>
-        </tr>
-    <% } %>
-</table>
+            </table>
+        </div>
+
+        <div class="m-4 text-right">
+            <form action="/logout?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-secondary">Log out</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
 <script type="text/javascript">
     
 function getcheckedTo(mode) {
