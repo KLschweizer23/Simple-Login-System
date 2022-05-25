@@ -40,4 +40,8 @@ DATABASE_URL="mysql://root:mypassword@localhost:3306/simple_schema
 
 3. Make Sure to create the schema in your mysql workbench!
 
+To start the server, instead of using nodemon, use this:
+```
+npm run devStart
+```
 
